@@ -66,8 +66,14 @@ public class MainActivity extends AppCompatActivity {
         maps_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MapViewActivity.class);
-                startActivity(intent);
+
+                if (mRequestingLocationUpdates){
+                    Intent intent = new Intent(MainActivity.this,MapViewActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this,"Please Start Location",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
     }
@@ -171,17 +177,11 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //TODO receives current location updates from loactionService.class
-            // Get extra data included in the Intent
-            //   Toast.makeText(DashboardActivity.this, "BROADCAST", Toast.LENGTH_SHORT).show();
             Log.e("receiver", "success");
-            //Latitude //Longitude
 
-  /*          Double Latitude = intent.getDoubleExtra("Latitude", 0);
-            Double Longitude = intent.getDoubleExtra("Longitude", 0);
-            mCurrentLocation = new LatLng(Latitude, Longitude);*/
-            updateUI();
-            //Toast.makeText(MainActivity.this, "fetching data in background", Toast.LENGTH_SHORT).show();
+            if (mRequestingLocationUpdates){
+                updateUI();
+            }
         }
     };
 
@@ -247,6 +247,13 @@ public class MainActivity extends AppCompatActivity {
 
         mRequestingLocationUpdates = false;
         setButtonsEnabledState();
-        stopService(myService);
+
+        try {
+            stopService(myService);
+            unregisterReceiver(mMessageReceiver);
+        } catch (Exception e){
+            //exception
+        }
+
     }
 }

@@ -72,20 +72,11 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
 
             LatLng position = new LatLng(mCurrentLocation.latitude, mCurrentLocation.longitude);
             mMap.addMarker(new MarkerOptions().position(position).title("current location"));
-            //mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-
             LatLngBounds bounds = new LatLngBounds.Builder().include(position).build();
             mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 30));
-
-            //TODO Add marker image
-            mMap.addPolyline((new PolylineOptions())
-                    .add(mFirstLocation, mCurrentLocation));
-
+            mMap.addPolyline((new PolylineOptions()).add(mFirstLocation, mCurrentLocation));
             mFirstLocation = mCurrentLocation;
 
-            //new MarkerAnimationHelper(mMap).animateMarker(marker, mCurrentLocation.latitude, mCurrentLocation.longitude);
-
-            //Toast.makeText(MainActivity.this, "fetching data in background", Toast.LENGTH_SHORT).show();
         }
     };
 

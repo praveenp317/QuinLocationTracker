@@ -139,7 +139,6 @@ public class MyLocationIntentService extends Service {
                 intent.putExtra("Provider", locationResult.getLastLocation().getProvider());
                 intent.putExtra("distance", locationResult.getLastLocation().getSpeed());
                 intent.putExtra("time", locationResult.getLastLocation().getTime());
-                intent.putExtra("msg", "Location Sent");
                 LocalBroadcastManager.getInstance(MyLocationIntentService.this).sendBroadcast(intent);
 
                 saveLocationData(locationResult);
