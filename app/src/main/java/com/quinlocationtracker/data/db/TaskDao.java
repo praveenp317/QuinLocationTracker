@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface TaskDao {
 
-    @Query("SELECT * FROM LocationTaskModel")
+    @Query("SELECT * FROM location_coarse_table")
     List<LocationTaskModel> getAll();
 
     @Insert
@@ -23,8 +23,9 @@ public interface TaskDao {
     @Delete
     void delete(LocationTaskModel locationTaskModel);
 
-
     @Update
     void update(LocationTaskModel locationTaskModel);
 
+    @Query("DELETE FROM location_coarse_table")
+    void deleteAllCourses();
 }

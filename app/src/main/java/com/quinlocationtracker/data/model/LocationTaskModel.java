@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(tableName = "location_coarse_table")
 public class LocationTaskModel implements Serializable {
 
     // Start time, Duration, Distance, Avg Speed, Avg Acceleration

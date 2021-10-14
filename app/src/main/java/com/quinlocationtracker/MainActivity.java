@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-
     // UI Widgets.
     private Button mStartUpdatesButton;
     private Button mStopUpdatesButton;
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -118,14 +118,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this,"Location is On",Toast.LENGTH_SHORT).show();
         }
-
-           /* if (checkPermissions()){
-                //locate current location and update in background
-
-            } else if (!checkPermissions()) {
-                requestPermissions();
-
-        }*/
     }
 
     private void requestPermissions() {
@@ -150,8 +142,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.i("TAG", "Requesting permission");
             // Request permission. It's possible this can be auto answered if device policy
-            // sets the permission in a given state or the user denied the permission
-            // previously and checked "Never ask again".
+
             ActivityCompat.requestPermissions( MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
@@ -254,6 +245,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             //exception
         }
-
     }
+
 }
